@@ -1,0 +1,115 @@
+@import "../../../assets/styles/index.scss";
+
+$lateralMargin: 8px;
+
+:host {
+  background-image: linear-gradient(to right, rgba(102, 153, 255, 0), rgba(255, 255, 255, 0.25));
+  background-color: rgba(255, 255, 255, 0.1);
+  border: rgb(57, 127, 204) solid 1px;
+  border-radius: 13px;
+  display: flex;
+  margin: 0 8px 15px 8px;
+  color: $font-light;
+  font-weight: bold;
+
+  @media screen and (max-width: 1030px) {
+    flex-direction: column;
+  }
+
+  .c-cat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #9469ad;
+    padding: 15px;
+    box-sizing: border-box;
+    min-width: 20%;
+    border-right: 5px solid #9469ad;
+
+    @media screen and (max-width: 1030px) {
+      border-right: none;
+      border-bottom: 5px solid #9469ad;      
+    }
+
+    .label {
+      font-size: 20pt;
+      margin-bottom: 30px;
+    }
+
+    .icon-lg {
+      height: 100px;
+      width: 100px;
+    }
+  }
+
+  .c-data {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1 1 auto;
+
+    @media screen and (max-width: 1030px) {
+      flex-direction: column;      
+    }
+
+    .c-content {
+      display: flex;
+      width: 50%;
+
+      &:nth-child(odd) {
+        border-right: 1px solid #ffffff66;
+        border-bottom: 1px solid #ffffff66;
+        box-sizing: border-box;
+      }
+
+      &:nth-child(even) {
+        border-bottom: 1px solid #ffffff66;
+      }
+
+      &:nth-last-child(2) {
+        border-bottom: none;
+      }
+
+      @media screen and (max-width: 1030px) {
+        width: 100%;
+      }
+
+      .icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 7px;
+        height: 70px;
+        width: 70px;
+      }
+    }
+
+    .info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      flex: 1 1 auto;
+      padding: 10px 10px 10px 0;
+      margin-left: 2rem;
+
+      &.row {
+        flex-direction: row;
+
+        .expand {
+          flex: 1 1 auto;
+          max-width: 50%;
+        }
+      }
+
+      .label {
+        color: $secondary;
+      }
+
+      .title {
+        margin: 0;
+        font-size: 1.4em;
+        margin-top: 0.5rem;
+      }
+    }
+  }
+}

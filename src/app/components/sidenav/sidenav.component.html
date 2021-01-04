@@ -1,0 +1,64 @@
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
+    <mat-toolbar class=" gradient-header example-toolbar">
+        <button mat-icon-button (click)="responsiveMenu = !responsiveMenu">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <img *ngIf="!sidenavSmall" src="assets/sidebar/LOGOHORIZONTAL@1x.png" alt="Smartsoft Labs" class="logo"
+            (click)="sidenavToggle()">
+        <img *ngIf="sidenavSmall" src="assets/sidebar/imagotipo@1x.png" alt="Smartsoft Labs" class="logo-small"
+            (click)="sidenavToggle()">
+        <div class="noti-container" *ngFor="let noti of notifications">
+            <mat-icon [svgIcon]="noti.icon" class="noti-icon tooltip" style="color: transparent;stroke:#6699ffff">
+                <span class="tooltiptext">{{noti.desc}}</span>
+            </mat-icon>
+
+            <span class="noti-label">{{noti.number}}</span>
+        </div>
+        <div class="noti-container">
+            <mat-icon svgIcon="configuracion_1" class="noti-icon" style="color: transparent;stroke:#6699ffff">
+            </mat-icon>
+        </div>
+        <div class="noti-container">
+            <mat-icon svgIcon="perfil_1" class="noti-icon" style="color: transparent;stroke:#6699ffff" mat-button
+                [matMenuTriggerFor]="menu"></mat-icon>
+        </div>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item>
+                <mat-icon>edit</mat-icon>Editar
+            </button>
+            <button mat-menu-item>
+                <mat-icon>exit_to_app</mat-icon>Cerrar sessión
+            </button>
+        </mat-menu>
+    </mat-toolbar>
+    <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+        <mat-sidenav [opened]="true" #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
+            [fixedInViewport]="mobileQuery.matches"
+            [ngClass]="{'m-sidenav': true, 'm-sidenav-small': sidenavSmall, 'responsiveNav': responsiveMenu, 'hiddenNav': !responsiveMenu}">
+            <mat-nav-list>
+                <a [ngClass]="{'items-nav': true, 'active-item': nav.active}" mat-list-item [routerLink]="nav.path"
+                    *ngFor="let nav of fillerNav">
+                    <img *ngIf="!nav.class"
+                        [ngClass]="{'icon-side-nav': !sidenavSmall, 'icon-side-nav-only': sidenavSmall}"
+                        [src]="nav.icon" alt="icon">
+                    <img *ngIf="nav.class"
+                        [ngClass]="{'icon-side-nav-svg': !sidenavSmall, 'icon-side-nav-svg-only': sidenavSmall}"
+                        [src]="nav.icon" alt="icon">
+                    <span
+                        [ngClass]="{'nav-label': !sidenavSmall, 'nav-label-hidden': sidenavSmall}">{{nav.label}}</span>
+                </a>
+            </mat-nav-list>
+            <button class="btn-menu" (click)="sidenavToggle()">
+                <i *ngIf="!sidenavSmall" class="fas fa-chevron-left"></i>
+                <i *ngIf="sidenavSmall" class="fas fa-chevron-right"></i>
+            </button>
+        </mat-sidenav>
+
+
+        <mat-sidenav-content [ngClass]="{'m-main': true, 'm-main-large': sidenavSmall}">
+            <div class="content">
+                <app-card *ngFor="let campaign of campaigns" [campaign]="campaign"></app-card>
+            </div>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>
